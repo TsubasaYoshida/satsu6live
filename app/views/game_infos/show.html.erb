@@ -1,0 +1,204 @@
+<p id="notice"><%= notice %></p>
+
+<%
+event = ''
+if @game_info.event == '2018春季1部'
+  event = '2018年度春季1部リーグ戦'
+elsif @game_info.event == '2018春季2部'
+  event = '2018年度春季2部リーグ戦'
+elsif @game_info.event == '2018春季3部'
+  event = '2018年度春季3部リーグ戦'
+elsif @game_info.event == '2018春季入替戦'
+  event = '2018年度春季リーグ戦入替戦'
+end
+%>
+
+  <h6>
+  <%= @game_info.batting_first_team %> vs <%= @game_info.field_first_team %>
+  <br>
+  <small>
+  <%= @game_info.date %> <%= @game_info.stadium %> <%= @game_info.game_number %>
+  <br>
+  <%= event %> <%= @game_info.round %>
+  </small>
+  </h6>
+
+<%
+team_top = ''
+if @game_info.batting_first_team == '東海大学北海道C'
+  team_top = '東'
+elsif @game_info.batting_first_team == '星槎道都大学'
+  team_top = '道'
+elsif @game_info.batting_first_team == '北翔大学'
+  team_top = '翔'
+elsif @game_info.batting_first_team == '北海道大学'
+  team_top = '北'
+elsif @game_info.batting_first_team == '札幌大学'
+  team_top = '札'
+elsif @game_info.batting_first_team == '北海学園大学'
+  team_top = '学'
+end
+
+team_bottom = ''
+if @game_info.field_first_team == '東海大学北海道C'
+  team_bottom = '東'
+elsif @game_info.field_first_team == '星槎道都大学'
+  team_bottom = '道'
+elsif @game_info.field_first_team == '北翔大学'
+  team_bottom = '翔'
+elsif @game_info.field_first_team == '北海道大学'
+  team_bottom = '北'
+elsif @game_info.field_first_team == '札幌大学'
+  team_bottom = '札'
+elsif @game_info.field_first_team == '北海学園大学'
+  team_bottom = '学'
+end
+
+        sum_top = 0
+        sum_bottom = 0
+        15.times { |n| 
+          str_top = "top" << (n+1).to_s
+          str_bottom = "bottom" << (n+1).to_s
+          sum_top += @game_info[str_top].to_i
+          sum_bottom += @game_info[str_bottom].to_i
+        }
+%>
+
+<table class="table table-bordered table-condensed text-center" style="margin-bottom: 5px; table-layout: fixed;">
+  <tfoot>
+    <tr>
+      <td></td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+      <td>9</td>
+      <% if @game_info.top10 %>
+      <td>10</td>
+      <% end %>
+      <% if @game_info.top11 %>
+      <td>11</td>
+      <% end %>
+      <% if @game_info.top12 %>
+      <td>12</td>
+      <% end %>
+      <td>R</td>
+    </tr>
+
+    <tr>
+      <td><%= team_top %></td>
+      <td><%= @game_info.top1 %></td>
+      <td><%= @game_info.top2 %></td>
+      <td><%= @game_info.top3 %></td>
+      <td><%= @game_info.top4 %></td>
+      <td><%= @game_info.top5 %></td>
+      <td><%= @game_info.top6 %></td>
+      <td><%= @game_info.top7 %></td>
+      <td><%= @game_info.top8 %></td>
+      <td><%= @game_info.top9 %></td>
+      <% if @game_info.top10 %>
+      <td><%= @game_info.top10 %></td>
+      <% end %>
+      <% if @game_info.top11 %>
+      <td><%= @game_info.top11 %></td>
+      <% end %>
+      <% if @game_info.top12 %>
+      <td><%= @game_info.top12 %></td>
+      <% end %>
+      <td><%= sum_top.to_s %></td>
+    </tr>
+
+    <tr>
+      <td><%= team_bottom %></td>
+      <td><%= @game_info.bottom1 %></td>
+      <td><%= @game_info.bottom2 %></td>
+      <td><%= @game_info.bottom3 %></td>
+      <td><%= @game_info.bottom4 %></td>
+      <td><%= @game_info.bottom5 %></td>
+      <td><%= @game_info.bottom6 %></td>
+      <td><%= @game_info.bottom7 %></td>
+      <td><%= @game_info.bottom8 %></td>
+      <td><%= @game_info.bottom9 %></td>
+      <% if @game_info.top10 %>
+      <td><%= @game_info.bottom10 %></td>
+      <% end %>
+      <% if @game_info.top11 %>
+      <td><%= @game_info.bottom11 %></td>
+      <% end %>
+      <% if @game_info.top12 %>
+      <td><%= @game_info.bottom12 %></td>
+      <% end %>
+      <td><%= sum_bottom.to_s %></td>
+    </tr>
+  </tfoot>
+</table>  
+
+<table class="table table-bordered table-condensed" style="margin-bottom: 5px">
+    <tbody>
+      <tr>
+        <td colspan="2">バッテリー</td>
+      </tr>
+      <tr>
+        <td align="center" style="padding: 0; width: 8.5%;"><%= team_top %></td><td><%= @game_info.pitcher_top %> - <%= @game_info.catcher_top %></td>
+      </tr>
+      <tr>
+        <td align="center" style="padding: 0;"><%= team_bottom %></td><td><%= @game_info.pitcher_bottom %> - <%= @game_info.catcher_bottom %></td>
+      </tr>
+  </tbody>
+</table>
+
+<table class="table table-bordered table-condensed" style="margin-bottom: 5px">
+    <tbody>
+      <tr>
+        <td colspan="2">本塁打</td>
+      </tr>
+      <tr>
+        <td align="center" style="padding: 0; width: 8.5%;"><%= team_top %></td><td><%= @game_info.homerun_top %></td>
+      </tr>
+      <tr>
+        <td align="center" style="padding: 0;"><%= team_bottom %></td><td><%= @game_info.homerun_bottom %></td>
+      </tr>
+  </tbody>
+</table>
+
+<table class="table table-bordered table-condensed" style="margin-bottom: 5px">
+    <tbody>
+      <tr>
+        <td colspan="2">三塁打</td>
+      </tr>
+      <tr>
+        <td align="center" style="padding: 0; width: 8.5%;"><%= team_top %></td><td><%= @game_info.threebase_top %></td>
+      </tr>
+      <tr>
+        <td align="center" style="padding: 0;"><%= team_bottom %></td><td><%= @game_info.threebase_bottom %></td>
+      </tr>
+  </tbody>
+</table>
+
+<table class="table table-bordered table-condensed" style="margin-bottom: 5px">
+    <tbody>
+      <tr>
+        <td colspan="2">二塁打</td>
+      </tr>
+      <tr>
+        <td align="center" style="padding: 0; width: 8.5%;"><%= team_top %></td><td><%= @game_info.twobase_top %></td>
+      </tr>
+      <tr>
+        <td align="center" style="padding: 0;"><%= team_bottom %></td><td><%= @game_info.twobase_bottom %></td>
+      </tr>
+  </tbody>
+</table>
+
+<p>
+    <% if session[:usr] %>
+      <%= link_to '編集', edit_game_info_path(@game_info), class: 'btn btn-default' %>
+      <%= link_to '得点入力', score_game_info_path(@game_info), class: 'btn btn-default' %>
+      <%= link_to '削除', @game_info, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default' %>
+</p><p>
+    <% end %>
+    <%= link_to '試合一覧', game_infos_path, class: 'btn btn-default' %>
+</p>

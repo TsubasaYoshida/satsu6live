@@ -1,0 +1,49 @@
+<% game_infos.each do |game_info| %>
+<table class="table" style="margin-bottom: 0">
+<tr><td>
+<%= link_to game_info do %>
+<div class="row">
+  <div class="col-xs-12 text-left"><%= game_info.date %></div>
+</div>
+        <%
+        vs = " - "
+        sum_top = 0
+        sum_bottom = 0
+        15.times { |n| 
+          str_top = "top" << (n+1).to_s
+          str_bottom = "bottom" << (n+1).to_s
+          sum_top += game_info[str_top].to_i
+          sum_bottom += game_info[str_bottom].to_i
+        }
+        %>
+        <div class="row">
+          <div class="col-xs-5 text-right" style="padding: 5px"><%= game_info.batting_first_team %></div>
+          <div class="col-xs-2 text-center" style="padding: 5px"><%= sum_top %><%= vs %><%= sum_bottom %></div>
+          <div class="col-xs-5 text-left" style="padding: 5px"><%= game_info.field_first_team %></div>
+        </div>
+        
+        <% if game_info.updatable %>
+        <div class="row">
+        <div class="col-xs-12 text-center">（試合終了）</div>
+        </div>
+        <% else %>
+        <div class="row">
+        <div class="col-xs-12 text-center">（試合中）</div>
+        </div>
+        <% end %>
+<% end %>
+</td></tr>
+</table>
+        <% if session[:usr] %>
+        <div align="right">
+          <%= link_to '編集', edit_game_info_path(game_info), class: 'btn btn-default' %>
+          <%= link_to '得点', score_game_info_path(game_info), class: 'btn btn-default' %>
+          <%= link_to '削除', game_info, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default' %>
+          <br>
+          <br>
+        </div>
+        <% end %>
+<% end %>
+
+
+

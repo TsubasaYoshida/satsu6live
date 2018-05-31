@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<%= form_tag({ controller: :game_infos, action: :find_league },
+  id: :fm, class: :search) do %>
+  <div class="form-group">
+  <label for="keyleague" style="font-weight: normal;">リーグ戦選択</label>
+  <%= select_tag :keyleague, options_for_select(['2018春季1部', '2018春季2部', '2018春季3部', '2018春季入替戦'], @league_selected ), {class: 'form-control' } %>
+  </div>
+  <%= submit_tag '絞り込み', class: 'btn btn-default' %>
+  <%= link_to '絞り込み解除', game_infos_path, class: 'btn btn-default' %>
+<% end %>
+
+<br>
+
+<%= render 'index', game_infos: @game_infos %>
+
+<br>
+
+<% if session[:usr] %>
+  <%= link_to '新規作成', new_game_info_path, class: 'btn btn-default' %>
+  <br>
+  <br>
+  <%= form_tag action: :logout do %>
+    <%= submit_tag 'ログアウト', class: 'btn btn-default' %>
+  <% end %>
+<% end %>

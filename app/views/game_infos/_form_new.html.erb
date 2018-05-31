@@ -1,0 +1,71 @@
+<%= form_with(model: game_info, local: true,) do |form| %>
+  <% if game_info.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(game_info.errors.count, "error") %> prohibited this game_info from being saved:</h2>
+
+      <ul>
+      <% game_info.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :date, '試合日' %>
+    <%= form.date_field :date, id: :game_info_date, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :batting_first_team, '先攻チーム' %>
+    <%= form.select :batting_first_team, ['東海大学北海道C', '北翔大学', '星槎道都大学', '北海道大学', '札幌大学', '北海学園大学'],
+      {include_blank: '選択してください' }, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :field_first_team, '後攻チーム' %>
+    <%= form.select :field_first_team, ['東海大学北海道C', '北翔大学', '星槎道都大学', '北海道大学', '札幌大学', '北海学園大学'],
+      {include_blank: '選択してください' }, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :stadium, '球場' %>
+    <%= form.text_field :stadium, id: :game_info_stadium, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :event, '大会' %>
+    <%= form.select :event, ['2018春季1部', '2018春季2部', '2018春季3部', '2018春季入替戦'],
+      {include_blank: '選択してください' }, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :round, '第1節／第2節' %>
+    <%= form.select :round, ['第1節', '第2節'],
+      {include_blank: '選択してください' }, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :pitcher_top, '投手（先攻チーム）' %>
+    <%= form.text_field :pitcher_top, id: :game_info_pitcher_top, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :catcher_top, '捕手（先攻チーム）' %>
+    <%= form.text_field :catcher_top, id: :game_info_catcher_top, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :pitcher_bottom, '投手（後攻チーム）' %>
+    <%= form.text_field :pitcher_bottom, id: :game_info_pitcher_bottom, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :catcher_bottom, '捕手（後攻チーム）' %>
+    <%= form.text_field :catcher_bottom, id: :game_info_catcher_bottom, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit '情報送信', data:{disable_with: '処理中…'}, class: 'btn btn-default' %>
+  </div>
+<% end %>
