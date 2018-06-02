@@ -96,8 +96,12 @@
   </div>
 
   <div class="form-group">
-    <%= form.label :updatable, '試合終了フラグ' %>
-    <%= form.check_box :updatable, id: :game_info_updatable, class: 'checkbox' %>
+    <div class="checkbox">
+      <label>
+        <%= form.check_box :updatable, id: :game_info_updatable, class: 'checkbox' %>
+        試合終了フラグ
+      </label>
+    </div>
   </div>
 
   <div class="form-group">
