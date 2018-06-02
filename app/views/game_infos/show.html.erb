@@ -54,6 +54,7 @@ elsif @game_info.field_first_team == '北海学園大学'
   team_bottom = '学'
 end
 
+        calledgame = ""
         sum_top = 0
         sum_bottom = 0
         15.times { |n| 
@@ -120,22 +121,84 @@ end
       <td><%= @game_info.bottom4 %></td>
       <td><%= @game_info.bottom5 %></td>
       <td><%= @game_info.bottom6 %></td>
+      <% if !@game_info.bottom7 && @game_info.updatable %>
+      <td>x</td>
+      <%
+      elsif @game_info.bottom7.to_i > 0 && @game_info.updatable && sum_bottom - sum_top >= 7 && !@game_info.top8
+        calledgame = "（7回コールド）"
+      %>
+      <td><%= @game_info.bottom7 %>x</td>
+      <% else %>
       <td><%= @game_info.bottom7 %></td>
-      <td><%= @game_info.bottom8 %></td>
-      <td><%= @game_info.bottom9 %></td>
+      <% end %>
+
+      <% if @game_info.top8 %>
+        <% if !@game_info.bottom8 && @game_info.updatable %>
+        <td>x</td>
+        <%
+        elsif @game_info.bottom8.to_i > 0 && @game_info.updatable && sum_bottom - sum_top >= 7 && !@game_info.top9
+          calledgame = "（8回コールド）"
+        %>
+        <td><%= @game_info.bottom8 %>x</td>
+        <% else %>
+        <td><%= @game_info.bottom8 %></td>
+        <% end %>
+      <% else %>
+      <td></td>
+      <% end %>
+
+      <% if @game_info.top9 %>
+        <% if !@game_info.bottom9 && @game_info.updatable %>
+        <td>x</td>
+        <% elsif @game_info.bottom9.to_i > 0 && @game_info.updatable && sum_bottom > sum_top && !@game_info.top10 %>
+        <td><%= @game_info.bottom9 %>x</td>
+        <% else %>
+        <td><%= @game_info.bottom9 %></td>
+        <% end %>
+      <% else %>
+      <td></td>
+      <% end %>
+
       <% if @game_info.top10 %>
-      <td><%= @game_info.bottom10 %></td>
+        <% if !@game_info.bottom10 && @game_info.updatable %>
+        <td>x</td>
+        <% elsif @game_info.bottom10.to_i > 0 && @game_info.updatable && sum_bottom > sum_top && !@game_info.top11 %>
+        <td><%= @game_info.bottom10 %>x</td>
+        <% else %>
+        <td><%= @game_info.bottom10 %></td>
+        <% end %>
       <% end %>
+
       <% if @game_info.top11 %>
-      <td><%= @game_info.bottom11 %></td>
+        <% if !@game_info.bottom11 && @game_info.updatable %>
+        <td>x</td>
+        <% elsif @game_info.bottom11.to_i > 0 && @game_info.updatable && sum_bottom > sum_top && !@game_info.top12 %>
+        <td><%= @game_info.bottom11 %>x</td>
+        <% else %>
+        <td><%= @game_info.bottom11 %></td>
+        <% end %>
       <% end %>
+
       <% if @game_info.top12 %>
-      <td><%= @game_info.bottom12 %></td>
+        <% if !@game_info.bottom12 && @game_info.updatable %>
+        <td>x</td>
+        <% elsif @game_info.bottom12.to_i > 0 && @game_info.updatable && sum_bottom > sum_top && !@game_info.top13 %>
+        <td><%= @game_info.bottom12 %>x</td>
+        <% else %>
+        <td><%= @game_info.bottom12 %></td>
+        <% end %>
       <% end %>
+
       <td><%= sum_bottom.to_s %></td>
     </tr>
   </tfoot>
-</table>  
+</table>
+
+<% if sum_top == sum_bottom && @game_info.updatable %>
+<p>（引き分け）</p>
+<% elsif calledgame != "" %>
+<p><%= calledgame %></p>
+<% end %>
 
 <table class="table table-bordered table-condensed" style="margin-bottom: 5px">
     <tbody>

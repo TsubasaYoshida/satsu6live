@@ -9,16 +9,20 @@
         vs = " - "
         sum_top = 0
         sum_bottom = 0
+        x = ""
         15.times { |n| 
           str_top = "top" << (n+1).to_s
           str_bottom = "bottom" << (n+1).to_s
           sum_top += game_info[str_top].to_i
           sum_bottom += game_info[str_bottom].to_i
         }
+        if (game_info.bottom9.to_i > 0 || game_info.bottom10.to_i > 0 || game_info.bottom11.to_i > 0 || game_info.bottom12.to_i > 0) && game_info.updatable && sum_bottom > sum_top
+          x = "x"
+        end
         %>
         <div class="row">
           <div class="col-xs-5 text-right" style="padding: 5px"><%= game_info.batting_first_team %></div>
-          <div class="col-xs-2 text-center" style="padding: 5px"><%= sum_top %><%= vs %><%= sum_bottom %></div>
+          <div class="col-xs-2 text-center" style="padding: 5px"><%= sum_top %><%= vs %><%= sum_bottom %><%= x %></div>
           <div class="col-xs-5 text-left" style="padding: 5px"><%= game_info.field_first_team %></div>
         </div>
         
@@ -26,7 +30,7 @@
         <div class="row">
         <div class="col-xs-12 text-center">（試合終了）</div>
         </div>
-        <% else %>
+        <% else%>
         <div class="row">
         <div class="col-xs-12 text-center">（試合中）</div>
         </div>

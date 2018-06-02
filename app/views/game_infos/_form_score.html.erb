@@ -59,6 +59,8 @@
     <%= form.number_field :top9, id: :game_info_top9, class: 'form-control' %>
   </div>
 
+  <% if game_info.top10 || game_info.bottom9 && !game_info.updatable %>
+
   <div class="form-group">
     <%= form.label :top10, '10回オモテ' %>
     <%= form.number_field :top10, id: :game_info_top10, class: 'form-control' %>
@@ -73,6 +75,8 @@
     <%= form.label :top12, '12回オモテ' %>
     <%= form.number_field :top12, id: :game_info_top12, class: 'form-control' %>
   </div>
+
+  <% end %>
 
   </div>
   <div class="col-xs-6">
@@ -122,6 +126,8 @@
     <%= form.number_field :bottom9, id: :game_info_bottom9, class: 'form-control' %>
   </div>
 
+  <% if game_info.top10 || game_info.bottom9 && !game_info.updatable %>
+
   <div class="form-group">
     <%= form.label :bottom10, '10回ウラ' %>
     <%= form.number_field :bottom10, id: :game_info_bottom10, class: 'form-control' %>
@@ -137,6 +143,8 @@
     <%= form.number_field :bottom12, id: :game_info_bottom12, class: 'form-control' %>
   </div>
 
+  <% end %>
+
   </div>
   </div>
 
@@ -147,5 +155,6 @@
 
   <div class="form-group">
     <%= form.submit '情報送信', data:{disable_with: '処理中…'}, class: 'btn btn-default' %>
+    <p class="help-block">後攻チーム勝利時の「x」は入力不要です。</p>
   </div>
 <% end %>
