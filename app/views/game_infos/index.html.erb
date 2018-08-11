@@ -4,7 +4,7 @@
       id: :fm, class: :search) do %>
       <div class="form-group">
       <label for="keyleague" style="font-weight: normal;">リーグ戦選択</label>
-      <%= select_tag :keyleague, options_for_select(['2018春季1部', '2018春季2部', '2018春季3部', '2018春季入替戦']), {include_blank: '選択してください', class: 'form-control' } %>
+      <%= select_tag :keyleague, options_for_select(['2018秋季1部', '2018秋季2部', '2018秋季3部', '2018秋季入替戦']), {include_blank: '選択してください', class: 'form-control' } %>
       </div>
       <%= submit_tag '絞り込み', class: 'btn btn-default' %>
     <% end %>

@@ -18,13 +18,15 @@
 
   <div class="form-group">
     <%= form.label :batting_first_team, '先攻チーム' %>
-    <%= form.select :batting_first_team, ['東海大学北海道C', '北翔大学', '星槎道都大学', '北海道大学', '札幌大学', '北海学園大学'],
+    <%= form.select :batting_first_team, ['東海大学北海道C', '北翔大学', '星槎道都大学', '北海道大学', '札幌大学', '北海学園大学', '札幌国際大学', '小樽商科大学', '札幌学院大学', 
+     '北海道教育大学岩見沢校', '札幌大谷大学', '北海道科学大学', '北海道教育大学札幌校', '北星学園大学', '酪農学園大学', '北海道文教大学', '北海道情報大学', '北海道医療大学'],
       {include_blank: '選択してください' }, class: 'form-control' %>
   </div>
 
   <div class="form-group">
     <%= form.label :field_first_team, '後攻チーム' %>
-    <%= form.select :field_first_team, ['東海大学北海道C', '北翔大学', '星槎道都大学', '北海道大学', '札幌大学', '北海学園大学'],
+    <%= form.select :field_first_team, ['東海大学北海道C', '北翔大学', '星槎道都大学', '北海道大学', '札幌大学', '北海学園大学', '札幌国際大学', '小樽商科大学', '札幌学院大学', 
+     '北海道教育大学岩見沢校', '札幌大谷大学', '北海道科学大学', '北海道教育大学札幌校', '北星学園大学', '酪農学園大学', '北海道文教大学', '北海道情報大学', '北海道医療大学'],
       {include_blank: '選択してください' }, class: 'form-control' %>
   </div>
 
@@ -35,7 +37,7 @@
 
   <div class="form-group">
     <%= form.label :event, '大会' %>
-    <%= form.select :event, ['2018春季1部', '2018春季2部', '2018春季3部', '2018春季入替戦'],
+    <%= form.select :event, ['2018秋季1部', '2018秋季2部', '2018秋季3部', '2018秋季入替戦'],
       {include_blank: '選択してください' }, class: 'form-control' %>
   </div>
 
