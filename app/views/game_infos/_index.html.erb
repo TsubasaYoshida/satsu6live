@@ -1,52 +1,45 @@
 <% game_infos.each do |game_info| %>
-<table class="table" style="margin-bottom: 0">
-<tr><td>
-<%= link_to game_info do %>
-<div class="row">
-  <div class="col-xs-12 text-left"><%= game_info.date %></div>
-</div>
-        <%
-        vs = " - "
-        sum_top = 0
-        sum_bottom = 0
-        x = ""
-        15.times { |n| 
-          str_top = "top" << (n+1).to_s
-          str_bottom = "bottom" << (n+1).to_s
-          sum_top += game_info[str_top].to_i
-          sum_bottom += game_info[str_bottom].to_i
-        }
-        if (game_info.bottom9.to_i > 0 || game_info.bottom10.to_i > 0 || game_info.bottom11.to_i > 0 || game_info.bottom12.to_i > 0) && game_info.updatable && sum_bottom > sum_top
-          x = "x"
-        end
-        %>
-        <div class="row">
-          <div class="col-xs-5 text-right" style="padding: 5px"><%= game_info.batting_first_team %></div>
-          <div class="col-xs-2 text-center" style="padding: 5px"><%= sum_top %><%= vs %><%= sum_bottom %><%= x %></div>
-          <div class="col-xs-5 text-left" style="padding: 5px"><%= game_info.field_first_team %></div>
-        </div>
-        
-        <% if game_info.updatable %>
-        <div class="row">
-        <div class="col-xs-12 text-center">（試合終了）</div>
-        </div>
-        <% else%>
-        <div class="row">
-        <div class="col-xs-12 text-center">（試合中）</div>
-        </div>
+  <table class="table" style="margin-bottom: 0">
+    <tr>
+      <td>
+        <%= link_to game_info do %>
+          <div class="row">
+            <div class="col-xs-12 text-left">
+              <%= game_info.date %>
+            </div>
+          </div>
+          <% vs = " - " %>
+          <div class="row">
+            <div class="col-xs-5 text-right" style="padding: 5px">
+              <%= game_info.batting_first_team %>
+            </div>
+            <div class="col-xs-2 text-center" style="padding: 5px">
+              <%= sum_top = game_info.get_sum_top %>
+              <%= vs %>
+              <%= sum_bottom = game_info.get_sum_bottom %><%= game_info.get_x_index(sum_top,sum_bottom) %>
+            </div>
+            <div class="col-xs-5 text-left" style="padding: 5px">
+              <%= game_info.field_first_team %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 text-center">
+              <%= game_info.get_gameset_msg %>
+            </div>
+          </div>
         <% end %>
-<% end %>
-</td></tr>
-</table>
-        <% if session[:usr] %>
-        <div align="right">
-          <%= link_to '編集', edit_game_info_path(game_info), class: 'btn btn-default' %>
-          <%= link_to '得点', score_game_info_path(game_info), class: 'btn btn-default' %>
-          <%= link_to '削除', game_info, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default' %>
-          <br>
-          <br>
-        </div>
-        <% end %>
+      </td>
+    </tr>
+  </table>
+  <% if session[:usr] %>
+    <div align="right">
+      <%= link_to '編集', edit_game_info_path(game_info), class: 'btn btn-default' %>
+      <%= link_to '得点', score_game_info_path(game_info), class: 'btn btn-default' %>
+      <%= link_to '削除', game_info, method: :delete, data: { confirm: '削除してよろしいですか？' }, class: 'btn btn-default' %>
+      <br>
+      <br>
+    </div>
+  <% end %>
 <% end %>
 
 
