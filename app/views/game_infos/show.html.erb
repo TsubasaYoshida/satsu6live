@@ -102,15 +102,10 @@ elsif @game_info.field_first_team == '北海道医療大学'
   team_bottom = '医'
 end
 
-        calledgame = ""
-        sum_top = 0
-        sum_bottom = 0
-        15.times { |n| 
-          str_top = "top" << (n+1).to_s
-          str_bottom = "bottom" << (n+1).to_s
-          sum_top += @game_info[str_top].to_i
-          sum_bottom += @game_info[str_bottom].to_i
-        }
+  sum_top = 0
+  sum_bottom = 0
+  sum_top = @game_info.get_sum_top
+  sum_bottom = @game_info.get_sum_bottom
 %>
 
 <table class="table table-bordered table-condensed text-center" style="margin-bottom: 5px; table-layout: fixed;">
@@ -127,13 +122,13 @@ end
       <td>8</td>
       <td>9</td>
       <% if @game_info.top10 %>
-      <td>10</td>
+        <td>10</td>
       <% end %>
       <% if @game_info.top11 %>
-      <td>11</td>
+        <td>11</td>
       <% end %>
       <% if @game_info.top12 %>
-      <td>12</td>
+        <td>12</td>
       <% end %>
       <td>R</td>
     </tr>
@@ -150,13 +145,13 @@ end
       <td><%= @game_info.top8 %></td>
       <td><%= @game_info.top9 %></td>
       <% if @game_info.top10 %>
-      <td><%= @game_info.top10 %></td>
+        <td><%= @game_info.top10 %></td>
       <% end %>
       <% if @game_info.top11 %>
-      <td><%= @game_info.top11 %></td>
+        <td><%= @game_info.top11 %></td>
       <% end %>
       <% if @game_info.top12 %>
-      <td><%= @game_info.top12 %></td>
+        <td><%= @game_info.top12 %></td>
       <% end %>
       <td><%= sum_top.to_s %></td>
     </tr>
@@ -167,17 +162,43 @@ end
       <td><%= @game_info.bottom2 %></td>
       <td><%= @game_info.bottom3 %></td>
       <td><%= @game_info.bottom4 %></td>
-      <td><%= @game_info.bottom5 %></td>
-      <td><%= @game_info.bottom6 %></td>
-      <% if !@game_info.bottom7 && @game_info.updatable %>
+
+      <% if !@game_info.bottom5 && @game_info.updatable %>
       <td>x</td>
       <%
-      elsif @game_info.bottom7.to_i > 0 && @game_info.updatable && sum_bottom - sum_top >= 7 && !@game_info.top8
-        calledgame = "（7回コールド）"
+      elsif @game_info.bottom5.to_i > 0 && @game_info.updatable && sum_bottom - sum_top >= 10 && !@game_info.top6
       %>
-      <td><%= @game_info.bottom7 %>x</td>
+      <td><%= @game_info.bottom5 %>x</td>
       <% else %>
-      <td><%= @game_info.bottom7 %></td>
+      <td><%= @game_info.bottom5 %></td>
+      <% end %>
+
+      <% if @game_info.top6 %>
+        <% if !@game_info.bottom6 && @game_info.updatable %>
+        <td>x</td>
+        <%
+        elsif @game_info.bottom6.to_i > 0 && @game_info.updatable && sum_bottom - sum_top >= 10 && !@game_info.top7
+        %>
+        <td><%= @game_info.bottom6 %>x</td>
+        <% else %>
+        <td><%= @game_info.bottom6 %></td>
+        <% end %>
+      <% else %>
+      <td></td>
+      <% end %>
+
+      <% if @game_info.top7 %>
+        <% if !@game_info.bottom7 && @game_info.updatable %>
+        <td>x</td>
+        <%
+        elsif @game_info.bottom7.to_i > 0 && @game_info.updatable && sum_bottom - sum_top >= 7 && !@game_info.top8
+        %>
+        <td><%= @game_info.bottom7 %>x</td>
+        <% else %>
+        <td><%= @game_info.bottom7 %></td>
+        <% end %>
+      <% else %>
+      <td></td>
       <% end %>
 
       <% if @game_info.top8 %>
@@ -185,7 +206,6 @@ end
         <td>x</td>
         <%
         elsif @game_info.bottom8.to_i > 0 && @game_info.updatable && sum_bottom - sum_top >= 7 && !@game_info.top9
-          calledgame = "（8回コールド）"
         %>
         <td><%= @game_info.bottom8 %>x</td>
         <% else %>
@@ -242,11 +262,7 @@ end
   </tfoot>
 </table>
 
-<% if sum_top == sum_bottom && @game_info.updatable %>
-<p>（引き分け）</p>
-<% elsif calledgame != "" %>
-<p><%= calledgame %></p>
-<% end %>
+<p><%= @game_info.get_gameset_msg_show(sum_top,sum_bottom) %></p>
 
 <table class="table table-bordered table-condensed" style="margin-bottom: 5px">
     <tbody>
@@ -308,7 +324,7 @@ end
     <% if session[:usr] %>
       <%= link_to '編集', edit_game_info_path(@game_info), class: 'btn btn-default' %>
       <%= link_to '得点入力', score_game_info_path(@game_info), class: 'btn btn-default' %>
-      <%= link_to '削除', @game_info, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default' %>
+      <%= link_to '削除', @game_info, method: :delete, data: { confirm: '削除してよろしいですか？' }, class: 'btn btn-default' %>
 </p><p>
     <% end %>
     <%= link_to '試合一覧', game_infos_path, class: 'btn btn-default' %>
