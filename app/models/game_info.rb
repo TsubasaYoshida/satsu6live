@@ -21,7 +21,7 @@ class GameInfo < ApplicationRecord
         x = ""
         if (self[:bottom9].to_i > 0 || self[:bottom10].to_i > 0 || self[:bottom11].to_i > 0 || self[:bottom12].to_i > 0) && self[:updatable] && sum_bottom > sum_top
             x = "x"
-        elsif ((self[:bottom5].to_i > 0 && !self[:top6]) || (self[:bottom6].to_i > 0 && !self[:top7]) || (self[:bottom7].to_i > 0 && !self[:top8]) || (self[:bottom8].to_i > 0 && !self[:top9])) && self[:updatable]
+        elsif ((self[:bottom5].to_i > 0 && !self[:top6]) || (self[:bottom6].to_i > 0 && !self[:top7]) || (self[:bottom7].to_i > 0 && !self[:top8]) || (self[:bottom8].to_i > 0 && !self[:top9])) && self[:updatable] && sum_bottom > sum_top
             x = "x"
         end
         return x
