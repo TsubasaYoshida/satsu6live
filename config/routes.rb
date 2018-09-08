@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'nittei/show'
+
   post 'game_infos/find_league'
   post 'game_infos/logout'
   post 'login/auth'
