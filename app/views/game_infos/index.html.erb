@@ -22,6 +22,10 @@
 
 <br>
 
+<%= paginate @game_infos %>
+
+<br>
+
 <% if session[:usr] %>
   <%= link_to '新規作成', new_game_info_path, class: 'btn btn-default' %>
   <br>
