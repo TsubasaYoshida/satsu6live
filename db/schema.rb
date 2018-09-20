@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180513114952) do
+ActiveRecord::Schema.define(version: 20180916150450) do
 
   create_table "game_infos", force: :cascade do |t|
     t.date "date"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20180513114952) do
     t.string "threebase_bottom"
     t.string "twobase_top"
     t.string "twobase_bottom"
+    t.string "message"
   end
 
   create_table "users", force: :cascade do |t|

@@ -78,6 +78,12 @@ GEM
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
+    kaminari (0.17.0)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
+    kaminari-bootstrap (3.0.1)
+      kaminari (>= 0.13.0)
+      rails
     loofah (2.2.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -180,6 +186,8 @@ DEPENDENCIES
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
   jbuilder (~> 2.5)
+  kaminari (~> 0.17.0)
+  kaminari-bootstrap (~> 3.0.1)
   pg
   puma (~> 3.7)
   rails (~> 5.1.6)

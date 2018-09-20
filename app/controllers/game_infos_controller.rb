@@ -5,7 +5,7 @@ class GameInfosController < ApplicationController
   # GET /game_infos
   # GET /game_infos.json
   def index
-    @game_infos = GameInfo.all.order(date: :desc, updatable: :asc, created_at: :desc)
+    @game_infos = GameInfo.page(params[:page]).per(10).order(date: :desc, updatable: :asc, created_at: :desc)
   end
 
   def find_league
@@ -90,7 +90,7 @@ class GameInfosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_info_params
-      params.require(:game_info).permit(:date, :batting_first_team, :field_first_team, :stadium, :game_number, :event, :round, :top1, :bottom1, :top2, :bottom2, :top3, :bottom3, :top4, :bottom4, :top5, :bottom5, :top6, :bottom6, :top7, :bottom7, :top8, :bottom8, :top9, :bottom9, :top10, :bottom10, :top11, :bottom11, :top12, :bottom12, :top13, :bottom13, :top14, :bottom14, :top15, :bottom15, :updatable, :pitcher_top, :pitcher_bottom, :catcher_top, :catcher_bottom, :homerun_top, :homerun_bottom, :threebase_top, :threebase_bottom, :twobase_top, :twobase_bottom)
+      params.require(:game_info).permit(:date, :batting_first_team, :field_first_team, :stadium, :game_number, :event, :round, :top1, :bottom1, :top2, :bottom2, :top3, :bottom3, :top4, :bottom4, :top5, :bottom5, :top6, :bottom6, :top7, :bottom7, :top8, :bottom8, :top9, :bottom9, :top10, :bottom10, :top11, :bottom11, :top12, :bottom12, :top13, :bottom13, :top14, :bottom14, :top15, :bottom15, :updatable, :pitcher_top, :pitcher_bottom, :catcher_top, :catcher_bottom, :homerun_top, :homerun_bottom, :threebase_top, :threebase_bottom, :twobase_top, :twobase_bottom, :message)
     end
 
 end

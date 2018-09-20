@@ -262,7 +262,20 @@ end
   </tfoot>
 </table>
 
-<p><%= @game_info.get_gameset_msg_show(sum_top,sum_bottom) %></p>
+<%= simple_format @game_info.get_gameset_msg_show(sum_top,sum_bottom) %>
+
+<% if @game_info.message %>
+  <table class="table table-bordered table-condensed" style="margin-bottom: 5px">
+    <tbody>
+        <tr>
+          <td>特記事項</td>
+        </tr>
+        <tr>
+          <td><%= @game_info.message %></td>
+        </tr>
+    </tbody>
+  </table>
+<% end %>
 
 <table class="table table-bordered table-condensed" style="margin-bottom: 5px">
     <tbody>
