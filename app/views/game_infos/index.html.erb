@@ -20,9 +20,7 @@
 
 <%= render 'index', game_infos: @game_infos %>
 
-<br>
-
-<%= paginate @game_infos %>
+<%= paginate @game_infos, window: 2 %>
 
 <br>
 
