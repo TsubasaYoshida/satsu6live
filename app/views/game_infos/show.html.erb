@@ -264,7 +264,7 @@ end
 
 <%= simple_format @game_info.get_gameset_msg_show(sum_top,sum_bottom) %>
 
-<% if @game_info.message %>
+<% if @game_info.message.present? %>
   <table class="table table-bordered table-condensed" style="margin-bottom: 5px">
     <tbody>
         <tr>
